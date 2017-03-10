@@ -107,7 +107,9 @@ void queryHumidity(){
   hour=Clock.getHour(h12, PM);
   date=Clock.getDate();
   month=Clock.getMonth(Century);
-  year=Clock.getYear();
+  year=Clock.getYear();//------------------------???????---------
+
+  
   String thedata="";
 soilHumidityAll=analogRead(soilHumidityPin);
 if(soilHumidityAll>900)
@@ -179,12 +181,12 @@ if(day2[4]==0||day2[4]==30)
   soilcom[i]=-soilcom[i];
   if(i==0)
   chazhi=i;
-  if(soilcom[i]>soilcom[chazhi])
+  if(soilcom[i]>soilcom[chazhi])//------------------------------------?//???????----------
   chazhi=i;
   }
   soilHumidityPinjun=(soilHumidityPinjun*6-soilHumidity[chazhi])/5;
   soilHumidityPinjun=map(soilHumidityPinjun,0,1023,0,100);
-  soilHumidityPinjun=100-soilHumidityPinjun;
+  soilHumidityPinjun=100-soilHumidityPinjun;//----------------------------------??????--------
 
    int chk = DHT.read11(3);  
       switch (chk)  
@@ -377,7 +379,7 @@ Wire.begin();
         Clock.setYear(17);  //Set the year (Last two digits of the year)
 	// Start the serial interface
 	Serial.begin(9600);
-  pinMode(4,OUTPUT);
+  //pinMode(4,OUTPUT);
   EEPROM.write(address,value);
   pinMode(waterOpenPin,OUTPUT);
   pinMode(nutritionPin,OUTPUT);
@@ -386,10 +388,10 @@ Wire.begin();
 }
 
 
-int contime=0;
+//int contime=0;
 void loop() {
   // put your main code here, to run repeatedly:
-  while(Serial.available()>0)
+  while(Serial.available()>0)//-------------------------------
 {
   rece+=char(Serial.read());
   delay(4);
@@ -407,5 +409,6 @@ jiance();//no id
 jsjiance();//E
 queryHumidity();
 mark=0;
-}}
+}
+}
 
