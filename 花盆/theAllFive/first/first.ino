@@ -43,7 +43,7 @@ void onlineControlOpen(){
    {WaterDosage=14;}
    else
    if(rece[2]=='C')
-   {WaterDosage=7;}
+   {WaterDosage=7;
      digitalWrite(waterOpenPin,HIGH);
      digitalWrite(hydrovalvePin,HIGH);
      for(int i=0;i<WaterDosage;i++){
@@ -52,7 +52,7 @@ void onlineControlOpen(){
      digitalWrite(hydrovalvePin,LOW);
      digitalWrite(waterOpenPin,LOW);
    }
-   else
+   else 
    if(rece[0]=='C'){
      if(rece[2]=='A')
    {NutritionDosage=20;}
@@ -159,7 +159,7 @@ thedata+=numOfWater;
 }
 }
 
-/*jiancehanshu*/
+/*----------------------------------------------------------jiancehanshu------------------------------------------------------------*/
 void jiance(){
   
 String thedata="";
@@ -191,7 +191,7 @@ if(day2[4]==0||day2[4]==30)
   int soilHumidityPinjun,soilcom[6],chazhi;
   soilHumidityPinjun=(soilHumidity[0]+soilHumidity[5]+soilHumidity[4]+soilHumidity[3]+soilHumidity[2]+soilHumidity[1])/6;
   for(int i=0;i<6;i++){
-  soilcom[i]=soilHumidityPinjun-soilcom[i];
+  soilcom[i]=soilHumidityPinjun-soilHumidity[i];
   if(soilcom[i]<0)
   soilcom[i]=-soilcom[i];
   if(i==0)
@@ -219,6 +219,9 @@ if(day2[4]==0||day2[4]==30)
       photoSensitive=0;
       waterLevel=(long)analogRead(2);
       int da=(waterLevel/650)*4;
+
+
+      
       if(da>5){waterLevel=1;}
       else
       {waterLevel=0;}
@@ -406,6 +409,7 @@ Wire.begin();
 int contime=0;
 void loop() {
   // put your main code here, to run repeatedly:
+  jiance();
   while(Serial.available()>0)
 {
   rece+=char(Serial.read());
@@ -414,8 +418,6 @@ void loop() {
   
 }
 if(mark==1){
-
-
 
 onlineControlOpen();//id:B&C
 cancelTheControlTime();//D

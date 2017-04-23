@@ -24,7 +24,7 @@ int year1,month1,data1,DoW1,hour1,minute1,second1;
 int day1[7],day2[7];
 int address=0;
 byte value=1;
-int theidofthis=1;
+//int theidofthis=1;
 /*time Open water*/
 int controltime=0,numtime=0;
 int addressTime[6];
@@ -182,7 +182,7 @@ if(day2[4]==0||day2[4]==30)
   if(soilcom[i]>soilcom[chazhi])
   chazhi=i;
   }
-  soilHumidityPinjun=(soilHumidityPinjun*6-soilHumidity[chazhi])/5;
+  soilHumidityPinjun=(soilHumidityPinjun*6-soilHumidity[chazhi])/5;//去掉最高值
   soilHumidityPinjun=map(soilHumidityPinjun,0,1023,0,100);
   soilHumidityPinjun=100-soilHumidityPinjun;
 
@@ -266,7 +266,7 @@ day2[4]=Clock.getMinute();
   int soilHumidityPinjun,soilcom[6],chazhi;
   soilHumidityPinjun=(soilHumidity[0]+soilHumidity[5]+soilHumidity[4]+soilHumidity[3]+soilHumidity[2]+soilHumidity[1])/6;
   for(int i=0;i<6;i++){
-  soilcom[i]=soilHumidityPinjun-soilcom[i];
+  soilcom[i]=soilHumidityPinjun-soilHumidity[i];
   if(soilcom[i]<0)
   soilcom[i]=-soilcom[i];
   if(i==0)
@@ -366,7 +366,7 @@ Wire.begin();
 }}
 
 void setup() {
-  // put your setup code here, to run once:
+  
 Wire.begin();
         Clock.setSecond(30);//Set the second 
         Clock.setMinute(20);//Set the minute 
@@ -382,24 +382,21 @@ Wire.begin();
   pinMode(waterOpenPin,OUTPUT);
   pinMode(nutritionPin,OUTPUT);
   pinMode(hydrovalvePin,OUTPUT);
+   pinMode(A0,OUTPUT);
   Serial.println("a1|2017-1-12 21:29:37|33|0|1|0|1");
 }
 
 
-int contime=0;
 void loop() {
-  // put your main code here, to run repeatedly:
+ 
+  jiance();
   while(Serial.available()>0)
 {
   rece+=char(Serial.read());
   delay(4);
   mark=1;
-  
 }
 if(mark==1){
-
-
-
 onlineControlOpen();//id:B&C
 cancelTheControlTime();//D
 timeOpenWater();//A
@@ -407,5 +404,7 @@ jiance();//no id
 jsjiance();//E
 queryHumidity();
 mark=0;
-}}
+}
+
+}
 
