@@ -86,7 +86,7 @@ class ChatClient1 extends Thread {
 	public ChatClient1(String ip, ClientUI1 ui) {
 		this.ui = ui;
 		try {
-			sc = new Socket(ip, 6605);//--------------------------------------------------------修改端口号
+			sc = new Socket(ip, 6606);//--------------------------------------------------------修改端口号
 			System.out.println("已顺利联接到服务器。");
 			ui.mainArea.append("[本客户端信息]已顺利联接到服务器。\n");
 			out = new PrintWriter(sc.getOutputStream(), true);
