@@ -85,7 +85,7 @@ class MainServer {
 		ui.setServer(this);
 		threads = new Socket[60];
 		try {
-			soc = new ServerSocket(6605);
+			soc = new ServerSocket(6606);
 		} catch (Exception e) {
 			System.out.println(e);
 		}
@@ -151,7 +151,7 @@ class ThreadServer extends Thread {
 		this.server = server;
 		this.index = index;
 		this.ui = ui;
-		this.port = 6605;
+		this.port = 6606;
 		this.client = socket;
 		try {
 			System.out.println("启动服务器成功，等待端口号：" + port);
